@@ -1,14 +1,15 @@
-def num(num):
-    print(num, end = " ")
+def print_num(num):
+    print(num, end="")
 
-print(8)
-print(8)
-print(0)
-print(0)
-print(5)
-print(5)
-print(5)
-print(3)
-print(5)
-print(3)
-print(5)
+
+print_num(8)
+print_num(8)
+print_num(0)
+print_num(0)
+print_num(5)
+print_num(5)
+print_num(5)
+print_num(3)
+print_num(5)
+print_num(3)
+print_num(5)
