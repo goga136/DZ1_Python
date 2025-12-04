@@ -5,13 +5,13 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-options = webdriver.EdgeOptions()
-driver = webdriver.Edge(options=options)
+
 
 @pytest.fixture()
 def driver():
-    driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
+    driver = webdriver.Chrome()
     driver.get("https://bonigarcia.dev/selenium-webdriver-java/data-types.html")
+    driver.maximize_window()
     driver.implicitly_wait(5)
     yield driver
     driver.quit()
@@ -57,13 +57,12 @@ def test_form_validation(driver):
     submit_button = driver.find_element(By.CSS_SELECTOR, ".btn.btn-outline-primary.mt-3")
     submit_button.click()
 
-    field = driver.find_element(By.CSS_SELECTOR,"[name = 'zip-code']").element.value_of_css_property('background-color')
-    assert field == '#f8d7da'
+    field = driver.find_element(By.ID,'zip-code').value_of_css_property('background-color')
+    assert field == 'rgba(248, 215, 218, 1)'
 
+    fields = ['first-name', 'last-name', 'address', 'city', 'country', 'e-mail', 'phone', 'job-position', 'company']
     for field in fields:
-        fields = ['first-name', 'last-name', 'address', 'city', 'country', 'e-mail', 'phone', 'job-position', 'company']
-        taps = driver.find_elements(By.CSS_SELECTOR, "form-label").element.value_of_css_property('background-color')
-        assert taps == '#d1e7dd'
-
+        taps = driver.find_element(By.ID, field).value_of_css_property('background-color')
+        assert taps == 'rgba(209, 231, 221, 1)'
 
     driver.quit()
